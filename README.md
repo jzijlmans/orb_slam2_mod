@@ -1,5 +1,9 @@
 # ORB-SLAM2
-**Authors:** [Raul Mur-Artal](http://webdiis.unizar.es/~raulmur/), [Juan D. Tardos](http://webdiis.unizar.es/~jdtardos/), [J. M. M. Montiel](http://webdiis.unizar.es/~josemari/) and [Dorian Galvez-Lopez](http://doriangalvez.com/) ([DBoW2](https://github.com/dorian3d/DBoW2))
+**Authors:** [Jeroen Zijlmans]
+
+Modified copy from the original orb-slam2 code from https://github.com/raulmur/ORB_SLAM2 
+
+# Their readme file:
 
 **13 Jan 2017**: OpenCV 3 and Eigen 3.3 are now supported.
 
