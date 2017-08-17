@@ -39,12 +39,26 @@ endif()
 find_package(Eigen3 3.1.0 REQUIRED)
 find_package(Pangolin REQUIRED)
 
+#set(VTK_DIR "/home/jeroen/VTK/VTK-build/")
+#find_package(VTK REQUIRED)
+#find_package( VTK REQUIRED PATHS "/home/jeroen/VTK/VTK-build" NO_DEFAULT_PATH)
+#message("~~~~~~~~~~~~~test: ${VTK_INCLUDE_DIRS}")
+#message("~~~~~~~~~~~~VTK_LIBRARY_DIRS: ${VTK_LIBRARIES}")
+#include(${VTK_USE_FILE})
+#find_package(PCL 1.3 REQUIRED COMPONENTS common io)
+
 include_directories(
 ${PROJECT_SOURCE_DIR}
 ${PROJECT_SOURCE_DIR}/include
 ${EIGEN3_INCLUDE_DIR}
 ${Pangolin_INCLUDE_DIRS}
+#${PCL_INCLUDE_DIRS}
 )
+
+#link_directories(${PCL_LIBRARY_DIRS})
+
+#add_definitions(${PCL_DEFINITIONS})
+
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
@@ -99,6 +113,10 @@ target_link_libraries(stereo_euroc ${PROJECT_NAME})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Monocular)
 
+add_executable(mono_rcs
+Examples/Monocular/mono_rcs.cc)
+target_link_libraries(mono_rcs ${PROJECT_NAME} ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})
+
 add_executable(mono_tum
 Examples/Monocular/mono_tum.cc)
 target_link_libraries(mono_tum ${PROJECT_NAME})
@@ -110,4 +128,3 @@ target_link_libraries(mono_kitti ${PROJECT_NAME})
 add_executable(mono_euroc
 Examples/Monocular/mono_euroc.cc)
 target_link_libraries(mono_euroc ${PROJECT_NAME})
-

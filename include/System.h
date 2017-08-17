@@ -26,6 +26,7 @@
 #include<thread>
 #include<opencv2/core/core.hpp>
 
+
 #include "Tracking.h"
 #include "FrameDrawer.h"
 #include "MapDrawer.h"
@@ -113,8 +114,11 @@ public:
     void SaveTrajectoryKITTI(const string &filename);
 
     //Save the map points (Added)
-    void SaveMapPoints(const string &filename);
-    
+    void CreatePCD(const string &filename);
+
+    // view a pointcloud (Added)
+    //void ViewCloud(const string &filename);
+
     // TODO: Save/Load functions
     // SaveMap(const string &filename);
     // LoadMap(const string &filename);
