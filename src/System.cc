@@ -556,64 +556,6 @@ void System::CreatePCD(const string &filename)
 
     f.close();
     cout << endl << "Map Points saved!" << endl;
-
-
-
 }
-
-// void System::ViewCloud(const string &filename)
-// {
-//   pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZRGBA>);
-//   pcl::io::loadPCDFile (filename, *cloud);
-//
-//   pcl::visualization::CloudViewer viewer ("viewer");
-//   viewer.showCloud(cloud);
-//   while(!viewer.wasStopped())
-//   {
-//
-//   }
-// }
-
-// void System::SaveMapPoints(const string &filename){
-//   cout << endl << "Getting map points " << endl;
-//
-//   vector<MapPoint*> vpMPs = mpMap->GetAllMapPoints();
-//
-//   cout << "creating pointcloud" <<endl;
-//   // create the pointcloud
-//   // initialize the pointcloud
-//   pcl::PointCloud<pcl::PointXYZ> PointCloud;
-//
-//   //setup the cloud
-//   PointCloud.width = vpMPs.size();
-//   PointCloud.height = 1;
-//   PointCloud.is_dense = false;
-//   PointCloud.points.resize (PointCloud.width * PointCloud.height);
-//
-//   //fill the cloud
-//   for(size_t i=0; i<vpMPs.size(); i++) {
-//     MapPoint* MapPoint = vpMPs[1]; // take the next point
-//
-//     if(MapPoint->isBad()){ // skip if it is 'bad'
-//       continue;
-//     }
-//
-//     // get the position of the point
-//     cv::Mat MapPointPos = MapPoint->GetWorldPos();
-//
-//     // fill the cloud with the positions
-//     PointCloud.points[i].x = MapPointPos.at<float>(0);
-//     PointCloud.points[i].y = MapPointPos.at<float>(1);
-//     PointCloud.points[i].z = MapPointPos.at<float>(2);
-//   }
-//
-//   cout << "saving pointcloud" <<endl;
-//   //save the pointcloud
-//   pcl::io::savePCDFileASCII(filename,PointCloud);
-//
-//   cout << "Pointcloud saved" <<endl;
-//
-//
-// }
 
 } //namespace ORB_SLAM

@@ -39,14 +39,6 @@ endif()
 find_package(Eigen3 3.1.0 REQUIRED)
 find_package(Pangolin REQUIRED)
 
-#set(VTK_DIR "/home/jeroen/VTK/VTK-build/")
-#find_package(VTK REQUIRED)
-#find_package( VTK REQUIRED PATHS "/home/jeroen/VTK/VTK-build" NO_DEFAULT_PATH)
-#message("~~~~~~~~~~~~~test: ${VTK_INCLUDE_DIRS}")
-#message("~~~~~~~~~~~~VTK_LIBRARY_DIRS: ${VTK_LIBRARIES}")
-#include(${VTK_USE_FILE})
-#find_package(PCL 1.3 REQUIRED COMPONENTS common io)
-
 include_directories(
 ${PROJECT_SOURCE_DIR}
 ${PROJECT_SOURCE_DIR}/include
@@ -54,11 +46,6 @@ ${EIGEN3_INCLUDE_DIR}
 ${Pangolin_INCLUDE_DIRS}
 #${PCL_INCLUDE_DIRS}
 )
-
-#link_directories(${PCL_LIBRARY_DIRS})
-
-#add_definitions(${PCL_DEFINITIONS})
-
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 

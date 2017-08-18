@@ -116,8 +116,6 @@ public:
     //Save the map points (Added)
     void CreatePCD(const string &filename);
 
-    // view a pointcloud (Added)
-    //void ViewCloud(const string &filename);
 
     // TODO: Save/Load functions
     // SaveMap(const string &filename);
