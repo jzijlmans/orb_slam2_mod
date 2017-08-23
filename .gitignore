@@ -18,7 +18,13 @@ Thirdparty/g2o/build/
 Thirdparty/g2o/config.h
 Thirdparty/g2o/lib/
 Vocabulary/ORBvoc.txt
+Images/
+pointclouds/
+Python/sam_cal_img_correct_resolution/
+KeyFrameTrajectory.txt
+MapPoints.txt
+pointcloud.pcd
+Examples/Monocular/mono_rcs
 build/
 *~
 lib/
-
