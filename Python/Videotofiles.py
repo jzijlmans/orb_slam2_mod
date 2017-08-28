@@ -51,13 +51,13 @@ def CreateVideoimages(videopath, imagefolder,orb):
             break #stop the while loop
         #There are new frames
         frame_id += 1 #create a new frame id
-        imagename = imagefolder + "/frame{0}.jpg".format(frame_id)
+        imagename = imagefolder + "/frame{:0>5}.jpg".format(frame_id)
         written = cv2.imwrite(imagename , frame)
         if not written:
             print "Writing frame number " + str(frame_id) + " failed"
 
         if orb: #write new line in rgb.txt
-            textfile.write(str(timestamp/1000) + " rgb/frame{0}.jpg\n".format(frame_id))
+            textfile.write(str(timestamp/1000) + " rgb/frame{:0>5}.jpg\n".format(frame_id))
 
         cv2.imshow('img',frame) #show the prossesed frame
         cv2.waitKey(1)
