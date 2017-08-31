@@ -16,14 +16,12 @@ parser.add_argument('-f','--fps',dest='fps', type=int, default=30, help='The fps
 parser.add_argument('-w','--imagewidth', dest='imagewidth', type = int, default=640, help='The width of the images for creating the calibfiles (default = 640)')
 parser.add_argument('-e','--imageheight', dest='imageheight', type = int, default=480, help='The height of the images for creating the calibfiles (default = 480)')
 args = parser.parse_args()
-print "\n\n"
-print args
 # termination criteria
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
 print "preparing opject points"
 # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
-objp = np.zeros((args.blocksheight*8,3), np.float32)
+objp = np.zeros((args.blocksheight*args.blockswidth,3), np.float32)
 objp[:,:2] = np.mgrid[0:args.blockswidth,0:args.blocksheight].T.reshape(-1,2)
 objp = objp * args.blocksize #resize to m
 
@@ -36,9 +34,9 @@ imgnames = args.imagefolder + '/*.jpg'
 images = glob.glob(imgnames)
 
 if len(images)<1:
-    pngnames = args.imagefolder + '/*.png'
-    print "There are no images in this directory:" + imgnames + "trying: " + pngnames
-    images = glob.glob(pngnames)
+    imgnames = args.imagefolder + '/*.png'
+    print "no .jpg found trying: " + imgnames
+    images = glob.glob(imgnames)
     if len(images)<1:
         sys.exit
 
@@ -70,6 +68,10 @@ for fname in images:
         img = cv2.drawChessboardCorners(img, (args.blockswidth,args.blocksheight), corners2,ret)
         cv2.imshow('img',img)
         cv2.waitKey(500)
+    else:
+        cv2.imshow('img',img)
+        cv2.waitKey(500)
+        print "no corners are found"
 
 print "done processing the images"
 cv2.destroyAllWindows()
@@ -95,12 +97,12 @@ if args.outputfiles == 'orbslam2' or args.outputfiles == 'both':
     orbfile.write('Camera.p2: ' + str(dist.item(3)) + '\n')
     orbfile.write('Camera.k3: ' + str(dist.item(4)) + '\n')
     orbfile.write('Camera.fps: ' + str(args.fps) +'\n')
-    orbfile.write('Camera.RGB: 1 \n ORBextractor.nFeatures: 1000 \n ORBextractor.scaleFactor: 1.2 \n ORBextractor.nLevels: 8 \n ORBextractor.iniThFAST: 20 \n ORBextractor.minThFAST: 7 \n Viewer.KeyFrameSize: 0.05 \n Viewer.KeyFrameLineWidth: 1 \n Viewer.GraphLineWidth: 0.9 \n Viewer.PointSize:2 \n Viewer.CameraSize: 0.08 \n Viewer.CameraLineWidth: 3 \n Viewer.ViewpointX: 0 \n Viewer.ViewpointY: -0.7 \n Viewer.ViewpointZ: -1.8 \n Viewer.ViewpointF: 500')
+    orbfile.write('Camera.RGB: 1 \nORBextractor.nFeatures: 1000 \nORBextractor.scaleFactor: 1.2\nORBextractor.nLevels: 8\nORBextractor.iniThFAST: 20 \nORBextractor.minThFAST: 7 \nViewer.KeyFrameSize: 0.05 \nViewer.KeyFrameLineWidth: 1 \nViewer.GraphLineWidth: 0.9 \nViewer.PointSize:2 \nViewer.CameraSize: 0.08 \nViewer.CameraLineWidth: 3 \nViewer.ViewpointX: 0 \nViewer.ViewpointY: -0.7 \nViewer.ViewpointZ: -1.8 \nViewer.ViewpointF: 500')
     print "orb_slam2 calibration file saved"
 if args.outputfiles == 'lsdslam' or args.outputfiles =='both':
     lsdfilename = args.outputfolder + '/lsd_slamcalib.txt'
     lsdfile = open(lsdfilename,'w')
-    lsdfile.write(str(mtx.item(0)/args.imagewidth) + " " + str(mtx.item(4)/args.imageheight) + " " + str(mtx.item(2)/args.imagewidth) + " " + str(mtx.item(5)/args.imageheight) + " ")
+    lsdfile.write(str(mtx.item(0)) + " " + str(mtx.item(4)) + " " + str(mtx.item(2)) + " " + str(mtx.item(5)) + " ")
     lsdfile.write(str(dist.item(0)) + " " +str(dist.item(1)) + " " + str(dist.item(2)) + " " + str(dist.item(3)) + " " + str(dist.item(4)) + " ")
     lsdfile.write("\n" + str(args.imagewidth) + " " + str(args.imageheight) + "\ncrop\n640 480")
     print "lsd_slam calibration file saved"
